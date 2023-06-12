@@ -2,22 +2,40 @@
 marp: true
 ---
 
-# Rust의 강점
-1. 안전한 메모리 관리
-2. 철저한 예외나 에러 관리
-3. 특이한 enum 시스템
-4. 트레이트
-5. 하이지닉 매크로
-6. 비동기 프로그래밍
-7. 제네릭
+# Rust의 예외와 에러 관리
+
+### Result와 Match
 
 ---
 
-# 단점
+# 목차
+1. Rust의 강점
+2. Rust의 단점 (싫어하는 이유)
+3. Result와 Match
 
-1. 러닝커브
-2. 잦은 스펙 변경 (0.x.x 버전의 라이브러리 존재)
-3. 컴파일이 느림
+---
+
+# Rust의 강점
+1. 안전한 메모리 관리 (Ownership)
+    * ex) 변수가 스코프 밖으로 벗어나면 값이 버려짐(drop 호출)
+2. **철저한 예외나 에러 관리**
+    * *Ok( ), Err( ), **panic!*** 명시적으로 작성
+3. 정확한 오류 지적
+```rust
+warning: function `tenor_client` is never used
+ --> src\client\tenor_client.rs:5:8
+  |
+5 | pub fn tenor_client() -> Result<TenorResponse>, TenorErrorResponse> {
+  |        ^^^^^^^^^^^^
+```
+
+---
+
+# 단점 (싫어하는 이유)
+
+1. 엄격한 타입
+2. 생태계와 라이브러리
+3. 비동기 프로그래밍은 어렵다
 
 ---
 
@@ -52,48 +70,11 @@ https://rinthel.github.io/rust-lang-book-ko/ch04-01-what-is-ownership.html
 
 ---
 
-# OOP (trait)
-
-1. 클래스가 없음
-2. 구조체로 선언
-3. 상속이 없음
-
-대신 trait으로 다형성을 지원
-trait은 다른 trait의 메서드들을 상속 받을 수 있다.
-
----
-
-# Rust 트러블 슈팅 경험
-
-1. Result 경험
-```rust
-pub async fn github_latest_tag_client()
-    -> Result<GithubLatestTagResult, GithubErrorResponse>
-```
-
-2. unwarp, warp
-
-```rust
-let response = client
-    .get(url)
-    .send()
-    .await
-    .unwrap();
-```
-
-3. 파생(Derive)
-```rust
-#[derive(Serialize, Deserialize)]
-pub struct TenorResults {
-    pub results: Vec<Results>
-}
-```
-
----
-
 # 참고자료
 
 https://rinthel.github.io/rust-lang-book-ko/
 
 https://www.youtube.com/watch?v=V6TR2FeCK5c 
 (Rust 크로스 플랫폼 프로그래밍 | 인프콘 2022)
+
+https://prev.rust-lang.org/ko-KR/faq.html
