@@ -69,7 +69,40 @@ error[E0384]: re-assignment of immutable variable `x`
 
 # Option (unwrap, match)
 - nullable한 표현 가능한 enum
+```rust
+fn give_drink(drink: Option<&str>) {
+    match drink {
+        Some("lemonade") => println!("너무 달아요"),
+        Some(inner)   => println!("{}? 좋아요", inner),
+        None          => println!("안마신다구요?"),
+    }
+}
+```
+```rust
+fn drink(drink: Option<&str>) {
+    let inside = drink.unwrap();
+    if inside == "lemonade" { panic!("아아아악!!!!!"); }
 
+    println!("{}는 좋아요!!!!!", inside);
+}
+```
+```rust
+fn main() {
+    let water  = Some("water");
+    let lemonade = Some("lemonade");
+    let void  = None;
+
+    give_adult(water);
+    give_adult(lemonade);
+    give_adult(void);
+
+    let coffee = Some("coffee");
+    let nothing = None;
+
+    drink(coffee);
+    drink(nothing);
+}
+```
 
 ---
 
