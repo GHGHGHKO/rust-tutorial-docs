@@ -201,6 +201,54 @@ fn main() {
 
 # trait
 - 다형성을 지원
+```rust
+struct BankAccount {
+    owner: String,
+    balance: f64,
+}
+
+impl BankAccount {
+    // 계좌 생성 메서드
+    fn new(owner: String, balance: f64) -> Self {
+        BankAccount {
+            owner,
+            balance,
+        }
+    }
+
+    // 입금 메서드
+    fn deposit(&mut self, amount: f64) {
+        self.balance += amount;
+        println!("{}님의 계좌에 {}원이 입금되었습니다.", self.owner, amount);
+    }
+
+    // 출금 메서드
+    fn withdraw(&mut self, amount: f64) -> Result<(), String> {
+        if amount <= self.balance {
+            self.balance -= amount;
+            println!("{}님의 계좌에서 {}원이 출금되었습니다.", self.owner, amount);
+            Ok(())
+        } else {
+            Err("잔액이 부족합니다.".to_string())
+        }
+    }
+
+    // 잔액 조회 메서드
+    fn check_balance(&self) {
+        println!("{}님의 현재 잔액은 {}원입니다.", self.owner, self.balance);
+    }
+}
+```
+```rust
+let mut account = BankAccount::new("고민수".to_string(), 1000.0);
+    account.check_balance(); // 현재 잔액 조회: 1000원
+    account.deposit(500.0); // 500원 입금
+    account.check_balance(); // 현재 잔액 조회: 1500원
+    account.withdraw(200.0).unwrap(); // 200원 출금
+    account.check_balance(); // 현재 잔액 조회: 1300원
+    account.withdraw(2000.0)
+        .unwrap_or_else(|error| println!("에러: {}", error)); // 잔액 부족으로 인한 출금 실패, 에러 출력
+```
 
 ---
 
