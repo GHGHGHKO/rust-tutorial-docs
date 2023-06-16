@@ -67,6 +67,23 @@ error[E0384]: re-assignment of immutable variable `x`
 
 ---
 
+# 메모리와 할당
+```rust
+{
+    let s = String::from("hello"); // s는 여기서부터 유효합니다
+
+    // s를 가지고 뭔가 합니다
+}                                  // 이 스코프는 끝났고, s는 더 이상 
+                                   // 유효하지 않습니다
+```
+1. 런타임에 운영체제로부터 메모리가 요청되어야 한다.
+2. String의 사용이 끝났을 때 운영체제에게 메모리를 반납할 방법이 필요하다.
+
+*러스트는 `}` 괄호가 닫힐때 자동적으로 `drop`을 호출합니다.*
+
+
+---
+
 # Option (unwrap, match)
 - nullable한 표현 가능한 enum
 ```rust
@@ -256,15 +273,6 @@ let mut account = BankAccount::new("고민수".to_string(), 1000.0);
     account.withdraw(2000.0)
         .unwrap_or_else(|error| println!("에러: {}", error)); // 잔액 부족으로 인한 출금 실패, 에러 출력
 ```
-
----
-
-# 소유권
-
-https://rinthel.github.io/rust-lang-book-ko/ch04-01-what-is-ownership.html
-
-1. 소유자가 함수의 인자로 전달되면, 소유권은 그 함수의 매개변수로 Move 된다
-2. 이동된 이후 원래 함수에 있던 변수는 더 이상 사용 할 수 없다.
 
 ---
 
