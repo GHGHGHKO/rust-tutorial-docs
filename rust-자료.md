@@ -202,6 +202,13 @@ fn main() {
 # trait
 - 다형성을 지원
 ```rust
+trait Account {
+    fn new(owner: String, balance: f64) -> Self;
+    fn deposit(&mut self, amount: f64);
+    fn withdraw(&mut self, amount: f64) -> Result<(), String>;
+    fn check_balance(&self);
+}
+
 struct BankAccount {
     owner: String,
     balance: f64,
