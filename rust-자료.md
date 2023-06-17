@@ -46,6 +46,12 @@ warning: function `tenor_client` is never used
 # 변수 선언, 불변성
 1. 변수는 immutable
 2. let 키워드를 사용하여 타입 자동 추론
+3. 추가 설명 넣기
+
+---
+
+# 변수 선언, 불변성
+ * 예시코드 추가
 ```rust
 fn main() {
     let x = 5;
@@ -86,45 +92,17 @@ error[E0384]: re-assignment of immutable variable `x`
 
 # Option (unwrap, match)
 - nullable한 표현 가능한 enum
-```rust
-fn give_drink(drink: Option<&str>) {
-    match drink {
-        Some("lemonade") => println!("너무 달아요"),
-        Some(inner)   => println!("{}? 좋아요", inner),
-        None          => println!("안마신다구요?"),
-    }
-}
-```
-```rust
-fn drink(drink: Option<&str>) {
-    let inside = drink.unwrap();
-    if inside == "lemonade" { panic!("아아아악!!!!!"); }
-
-    println!("{}는 좋아요!!!!!", inside);
-}
-```
-```rust
-fn main() {
-    let water  = Some("water");
-    let lemonade = Some("lemonade");
-    let void  = None;
-
-    give_adult(water);
-    give_adult(lemonade);
-    give_adult(void);
-
-    let coffee = Some("coffee");
-    let nothing = None;
-
-    drink(coffee);
-    drink(nothing);
-}
-```
+- 설명 추가 및 예제 추가
 
 ---
 
 # match
 - switch와 비슷하지만, match는 모든 케이스를 표현해야함 (안전성)
+- 설명 추가 및 예시코드 변경
+---
+
+# match
+
 ```rust
 fn find_prime_number(number: u32) {
     match number {
@@ -172,6 +150,11 @@ fn main() {
 
 # result (bool)
 - 실패할 가능성이 있는 값을 반환하는 Generic enum
+- 예시 설명 추가 및 예시 코드 변경
+
+---
+
+# result (bool)
 ```rust
 fn ok_or_err(is_success: bool) -> Result<String, String> {
     match is_success {
@@ -217,61 +200,74 @@ fn main() {
 ---
 
 # trait
-- 다형성을 지원
+- Java의 interface와 유사
+- trait bound 설명추가 및 예시 추가 (trait bound)
+
+---
+
+# trait 
+
 ```rust
-trait Account {
-    fn new(owner: String, balance: f64) -> Self;
-    fn deposit(&mut self, amount: f64);
-    fn withdraw(&mut self, amount: f64) -> Result<(), String>;
-    fn check_balance(&self);
+use serde::{de::DeserializeOwned, Serialize};
+
+pub trait FromDb {
+    type Output;
+    #[allow(clippy::wrong_self_convention)]
+    fn from_db(self) -> Self::Output;
 }
 
-struct BankAccount {
-    owner: String,
-    balance: f64,
+impl<T: FromDb> FromDb for Vec<T> where T: Send + Serialize + DeserializeOwned {
+    type Output = Vec<T::Output>;
+    #[allow(clippy::wrong_self_convention)]
+    #[inline(always)]
+    fn from_db(self) -> Self::Output {
+        self.into_iter().map(FromDb::from_db).collect()
+    }
 }
 
-impl BankAccount {
-    // 계좌 생성 메서드
-    fn new(owner: String, balance: f64) -> Self {
-        BankAccount {
-            owner,
-            balance,
-        }
-    }
-
-    // 입금 메서드
-    fn deposit(&mut self, amount: f64) {
-        self.balance += amount;
-        println!("{}님의 계좌에 {}원이 입금되었습니다.", self.owner, amount);
-    }
-
-    // 출금 메서드
-    fn withdraw(&mut self, amount: f64) -> Result<(), String> {
-        if amount <= self.balance {
-            self.balance -= amount;
-            println!("{}님의 계좌에서 {}원이 출금되었습니다.", self.owner, amount);
-            Ok(())
-        } else {
-            Err("잔액이 부족합니다.".to_string())
-        }
-    }
-
-    // 잔액 조회 메서드
-    fn check_balance(&self) {
-        println!("{}님의 현재 잔액은 {}원입니다.", self.owner, self.balance);
+impl<T: FromDb> FromDb for Option<T> {
+    type Output = Option<T::Output>;
+    #[allow(clippy::wrong_self_convention)]
+    #[inline(always)]
+    fn from_db(self) -> Self::Output {
+        self.map(crate::FromDb::from_db)
     }
 }
 ```
+
+---
+
+# trait
 ```rust
-let mut account = BankAccount::new("고민수".to_string(), 1000.0);
-    account.check_balance(); // 현재 잔액 조회: 1000원
-    account.deposit(500.0); // 500원 입금
-    account.check_balance(); // 현재 잔액 조회: 1500원
-    account.withdraw(200.0).unwrap(); // 200원 출금
-    account.check_balance(); // 현재 잔액 조회: 1300원
-    account.withdraw(2000.0)
-        .unwrap_or_else(|error| println!("에러: {}", error)); // 잔액 부족으로 인한 출금 실패, 에러 출력
+#[derive(Debug, Serialize, Deserialize)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+impl FromDb for Person {
+    type Output = Self;
+
+    fn from_db(self) -> Self::Output {
+        self
+    }
+}
+
+fn main() {
+    let persons: Vec<Person> = vec![
+        Person { name: "John".to_string(), age: 30 },
+        Person { name: "Jane".to_string(), age: 25 },
+        Person { name: "Mike".to_string(), age: 40 },
+    ];
+
+    let persons_output: Vec<Person> = FromDb::from_db(persons);
+    println!("{:?}", persons_output);
+
+    let person: Option<Person> = Some(Person { name: "Alice".to_string(), age: 35 });
+
+    let person_output: Option<Person> = FromDb::from_db(person);
+    println!("{:?}", person_output);
+}
 ```
 
 ---
