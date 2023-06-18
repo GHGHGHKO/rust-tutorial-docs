@@ -44,17 +44,18 @@ warning: function `tenor_client` is never used
 ---
 
 # 변수 선언, 불변성
-1. 변수는 immutable
+1. 기본 변수는 immutable (불변)
+    * 가변은 *가끔* 값을 나중에 변경하면 찾기가 어려움
 2. let 키워드를 사용하여 타입 자동 추론
 3. 추가 설명 넣기
 
 ---
 
-# 변수 선언, 불변성
- * 예시코드 추가
+# 변수의 불변성
+ * 기본 변수는 immutable (불변)
 ```rust
 fn main() {
-    let x = 5;
+    let x = 5; // let mut x = 5;
     println!("The value of x is: {}", x);
     x = 6;
     println!("The value of x is: {}", x);
@@ -70,6 +71,24 @@ error[E0384]: re-assignment of immutable variable `x`
 4 |     x = 6;
   |     ^^^^^ re-assignment of immutable variable
   ```
+
+---
+
+# 자동 추론 (타입 추론)
+
+ * let 키워드를 사용하여 타입 자동 추론
+```rust
+let signed_int = 0xff_ff_ff_ff_ff; // type i32
+
+let unsigned_int = 123_u32; // type u32
+
+let a: u64 = 123; // type u64
+
+let url = "https://httpbin.org/ip"; // type &str
+
+let tenor_key = env::var("TENOR_API_KEY")
+    .unwrap_or_else(|_| String::from("<default_api_key>")); // type String
+```
 
 ---
 
