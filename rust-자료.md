@@ -39,7 +39,8 @@ warning: function `tenor_client` is never used
 2. 생태계와 라이브러리
     * 메이저한 언어(Java, C++, Python ..)에 비해 정보가 부족
 3. 비동기 프로그래밍은 어렵다
-    * 비동기에 특화되어있지만 비동기는 어렵다
+    * 비동기에 특화되어있지만 비동기는 *어렵다*
+    * *Tokio*, *QUIC*, *WebFlux* 등
 
 ---
 
