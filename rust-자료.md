@@ -24,11 +24,11 @@ marp: true
     * *Ok( ), Err( ), **panic!*** 명시적으로 작성
 4. 정확한 오류 지적
 ```rust
-warning: function `tenor_client` is never used
- --> src\client\tenor_client.rs:5:8
-  |
-5 | pub fn tenor_client() -> Result<TenorResponse, TenorErrorResponse> {
-  |        ^^^^^^^^^^^^
+error[E0308]: mismatched types
+  --> src\client\tenor_client.rs:39:17
+   |
+39 |                 cod: 500,
+   |                 ^^^ help: a field with a similar name exists: `code`
 ```
 
 ---
