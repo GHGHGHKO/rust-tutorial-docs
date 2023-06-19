@@ -32,6 +32,23 @@ warning: function `tenor_client` is never used
 
 ---
 
+# 메모리와 할당
+```rust
+{
+    let s = String::from("hello"); // s는 여기서부터 유효합니다
+
+    // s를 가지고 뭔가 합니다
+}                                  // 이 스코프는 끝났고, s는 더 이상 
+                                   // 유효하지 않습니다
+```
+1. 런타임에 운영체제로부터 메모리가 요청되어야 한다.
+2. String의 사용이 끝났을 때 운영체제에게 메모리를 반납할 방법이 필요하다.
+
+*러스트는 `}` 괄호가 닫힐때 자동적으로 `drop`을 호출합니다.*
+
+
+---
+
 # 단점 (혹은 싫어하는 이유)
 
 1. 엄격한 타입
@@ -178,23 +195,6 @@ error[E0499]: cannot borrow `s` as mutable more than once at a time
     let tenor_key = env::var("TENOR_API_KEY")
         .unwrap_or_else(|_| String::from("<default_api_key>")); // type String
 ```
-
----
-
-# 메모리와 할당
-```rust
-{
-    let s = String::from("hello"); // s는 여기서부터 유효합니다
-
-    // s를 가지고 뭔가 합니다
-}                                  // 이 스코프는 끝났고, s는 더 이상 
-                                   // 유효하지 않습니다
-```
-1. 런타임에 운영체제로부터 메모리가 요청되어야 한다.
-2. String의 사용이 끝났을 때 운영체제에게 메모리를 반납할 방법이 필요하다.
-
-*러스트는 `}` 괄호가 닫힐때 자동적으로 `drop`을 호출합니다.*
-
 
 ---
 
