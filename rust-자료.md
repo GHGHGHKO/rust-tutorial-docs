@@ -35,12 +35,37 @@ warning: function `tenor_client` is never used
 # 단점 (혹은 싫어하는 이유)
 
 1. 엄격한 타입
-    * 명확한 타입, 빌림(Borrowing)
+    * 명확한 타입
+    * ***참조자(References)와 빌림(Borrowing)***
 2. 생태계와 라이브러리
     * 메이저한 언어(Java, C++, Python ..)에 비해 정보가 부족
 3. 비동기 프로그래밍은 어렵다
     * 비동기에 특화되어있지만 비동기는 *어렵다*
     * *Tokio*, *QUIC*, *WebFlux* 등
+
+---
+
+# 참조자(References)
+
+1. `&`기호가 참조자를 의미
+2. **소유권**(Ownership)을 넘기지 않고 참조 가능
+3. 즉, 소유권이 없음 (스코프 밖에서 메모리 반납되지 않음)
+
+```rust
+let s1 = String::from("hello");
+
+let len = calculate_length(&s1);
+
+fn calculate_length(s: &String) -> usize { // s는 String의 참조자입니다
+    s.len()
+} // 여기서 s는 스코프 밖으로 벗어났습니다. 하지만 가리키고 있는 값에 대한 소유권이 없기
+  // 때문에, 아무런 일도 발생하지 않습니다. (메모리가 반납되지 않음)
+```
+
+---
+
+# 빌림(Borrowing)
+
 
 ---
 
