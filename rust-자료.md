@@ -65,7 +65,7 @@ error[E0308]: mismatched types
 
  * let 키워드를 사용하여 타입 자동 추론
 ```rust
-    let signed_int = 0xff_ff_ff_ff_ff; // type i32
+    let signed_int = 0xff_ff_ff_ff_ff; // type i32 ???
 
     let unsigned_int = 123_u32; // type u32
 
