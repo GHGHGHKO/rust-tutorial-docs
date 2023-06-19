@@ -2,7 +2,7 @@
 marp: true
 ---
 
-# Rust의 예외와 에러 관리
+# Rust와 예외, 에러 관리
 
 ### Result와 Match
 
@@ -19,14 +19,14 @@ marp: true
 # Rust의 강점
 1. 안전한 메모리 관리 (Ownership)
     * ex) 변수가 스코프 밖으로 벗어나면 값이 버려짐(drop 호출)
-2. **철저한 예외나 에러 관리**
+2. **철저한 예외나 에러 관리** (Result, match)
     * *Ok( ), Err( ), **panic!*** 명시적으로 작성
 3. 정확한 오류 지적
 ```rust
 warning: function `tenor_client` is never used
  --> src\client\tenor_client.rs:5:8
   |
-5 | pub fn tenor_client() -> Result<TenorResponse>, TenorErrorResponse> {
+5 | pub fn tenor_client() -> Result<TenorResponse, TenorErrorResponse> {
   |        ^^^^^^^^^^^^
 ```
 
@@ -42,6 +42,29 @@ warning: function `tenor_client` is never used
 3. 비동기 프로그래밍은 어렵다
     * 비동기에 특화되어있지만 비동기는 *어렵다*
     * *Tokio*, *QUIC*, *WebFlux* 등
+
+---
+
+# 변수의 불변성
+ * 기본 변수는 immutable (불변)
+```rust
+fn main() {
+    let x = 5; // let mut x = 5;
+    println!("The value of x is: {}", x);
+    x = 6;
+    println!("The value of x is: {}", x);
+}
+```
+```rust
+error[E0384]: re-assignment of immutable variable `x`
+ --> src/main.rs:4:5
+  |
+2 |     let x = 5;
+  |         - first assignment to `x`
+3 |     println!("The value of x is: {}", x);
+4 |     x = 6;
+  |     ^^^^^ re-assignment of immutable variable
+  ```
 
 ---
 
@@ -133,29 +156,6 @@ error[E0499]: cannot borrow `s` as mutable more than once at a time
 3. Shadowing
     * 변수의 재사용과 값의 재정의
     * *이전 값을 재사용하는 실수를 방지*
-
----
-
-# 변수의 불변성
- * 기본 변수는 immutable (불변)
-```rust
-fn main() {
-    let x = 5; // let mut x = 5;
-    println!("The value of x is: {}", x);
-    x = 6;
-    println!("The value of x is: {}", x);
-}
-```
-```rust
-error[E0384]: re-assignment of immutable variable `x`
- --> src/main.rs:4:5
-  |
-2 |     let x = 5;
-  |         - first assignment to `x`
-3 |     println!("The value of x is: {}", x);
-4 |     x = 6;
-  |     ^^^^^ re-assignment of immutable variable
-  ```
 
 ---
 
