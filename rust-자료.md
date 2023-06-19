@@ -66,6 +66,37 @@ fn calculate_length(s: &String) -> usize { // s는 String의 참조자입니다
 
 # 빌림(Borrowing)
 
+1. 함수의 파라미터로 참조자를 만드는 것을 ***빌림***이라고 함
+2. 빌리고 용무가 끝나면 돌려주어야함
+3. 빌린 값은 고칠 수 없음 (가변 참조자는 가능)
+```rust
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+```
+---
+
+# 빌림(Borrowing)
+
+* 빌린 값을 고치기
+```rust
+fn main() {
+    let s = String::from("hello");
+
+    change(&s);
+}
+
+fn change(some_string: &String) {
+    some_string.push_str(", world");
+}
+```
+```
+error: cannot borrow immutable borrowed content `*some_string` as mutable
+ --> error.rs:8:5
+  |
+8 |     some_string.push_str(", world");
+  |     ^^^^^^^^^^^
+```
 
 ---
 
