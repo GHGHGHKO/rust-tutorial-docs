@@ -50,6 +50,7 @@ warning: function `tenor_client` is never used
 1. `&`기호가 참조자를 의미
 2. **소유권**(Ownership)을 넘기지 않고 참조 가능
 3. 즉, 소유권이 없음 (스코프 밖에서 메모리 반납되지 않음)
+4. 댕글링 참조자(Dangling References)가 되지 않도록 보장
 
 ```rust
 let s1 = String::from("hello");
@@ -78,16 +79,16 @@ fn calculate_length(s: &String) -> usize {
 
 # 빌림(Borrowing)
 
-* 빌린 값을 고치기
+* 변수가 불변인 것 처럼 참조자도 불변
 ```rust
 fn main() {
     let s = String::from("hello");
 
-    change(&s);
+    change(&s); // 가변 참조자: change(&mut s);
 }
 
-fn change(some_string: &String) {
-    some_string.push_str(", world");
+fn change(some_string: &String) { // 가변 참조자: fn change(some_string: &mut String)
+    some_string.push_str(", world"); 
 }
 ```
 ```
@@ -96,6 +97,30 @@ error: cannot borrow immutable borrowed content `*some_string` as mutable
   |
 8 |     some_string.push_str(", world");
   |     ^^^^^^^^^^^
+```
+
+---
+
+# 가변 참조자(Mutable References, data race 방지)
+1. 두 개 이상의 포인터가 동시에 같은 데이터에 접근한다.
+2. 그 중 적어도 하나의 포인터가 데이터를 쓴다.
+3. 데이터에 접근하는데 동기화를 하는 어떠한 메커니즘도 없다.
+```rust
+let mut s = String::from("hello");
+
+let r1 = &mut s;
+let r2 = &mut s;
+```
+```
+error[E0499]: cannot borrow `s` as mutable more than once at a time
+ --> borrow_twice.rs:5:19
+  |
+4 |     let r1 = &mut s;
+  |                   - first mutable borrow occurs here
+5 |     let r2 = &mut s;
+  |                   ^ second mutable borrow occurs here
+6 | }
+  | - first borrow ends here
 ```
 
 ---
