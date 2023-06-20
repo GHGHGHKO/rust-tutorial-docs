@@ -200,12 +200,6 @@ error[E0499]: cannot borrow `s` as mutable more than once at a time
 
 ---
 
-# Option
-- nullable한 표현 가능한 enum
-- 설명 추가 및 예제 추가
-
----
-
 # match
 - switch와 비슷하지만, match는 모든 케이스를 표현해야함 (안전성)
 - 설명 추가 및 예시코드 변경
