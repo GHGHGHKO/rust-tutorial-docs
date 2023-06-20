@@ -202,7 +202,7 @@ error[E0499]: cannot borrow `s` as mutable more than once at a time
 
 # match
 - switch와 비슷하지만, match는 모든 케이스를 표현해야함 (안전성)
-- 설명 추가 및 예시코드 변경
+- `if`, `else if`, `else`를 가독성 있게 변경
 ---
 
 # match
@@ -226,6 +226,36 @@ fn main() {
     find_prime_number(5); // 5 is a prime number!
 }
 ```
+
+---
+
+# match (enum)
+```rust
+pub enum Weather {
+    Rain,
+    Snowing,
+    Foggy,
+    Earthquake,
+    Typhoon
+}
+
+impl Weather {
+    pub fn weather_forecasting_stone(&self) -> &str {
+        match self {
+            Self::Rain => "Stone is wet",
+            Self::Snowing => "White on top",
+            Self::Foggy => "Can't see stone",
+            Self::Earthquake => "Stone jumping up & down",
+            Self::Typhoon => "Stone gone"
+        }
+    }
+}
+
+fn main() {
+    println!("{:?}", Weather::weather_forecasting_stone(&Weather::Earthquake))
+}
+```
+
 
 ---
 
