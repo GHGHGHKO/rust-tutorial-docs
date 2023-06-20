@@ -19,7 +19,8 @@ marp: true
 # Rust의 강점
 1. 안전한 메모리 관리 (Ownership)
     * ex) 변수가 스코프 밖으로 벗어나면 값이 버려짐(drop 호출)
-2. 불변성
+2. 불변성 
+    * `let or let mut`
 3. **철저한 예외나 에러 관리** (Result, match)
     * *Ok( ), Err( ), **panic!*** 명시적으로 작성
 4. 정확한 오류 지적
