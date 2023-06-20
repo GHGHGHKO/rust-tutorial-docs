@@ -66,8 +66,6 @@ error[E0308]: mismatched types
 
  * let 키워드를 사용하여 타입 자동 추론
 ```rust
-    let signed_int = 0xff_ff_ff_ff_ff; // type i32 ???
-
     let unsigned_int = 123_u32; // type u32
 
     let a: u64 = 123; // type u64
@@ -80,6 +78,8 @@ error[E0308]: mismatched types
 
     let tenor_key = env::var("TENOR_API_KEY")
         .unwrap_or_else(|_| String::from("<default_api_key>")); // type String
+
+    let signed_int = 0xff_ff_ff_ff_ff; // type i32 ???
 ```
 
 ---
