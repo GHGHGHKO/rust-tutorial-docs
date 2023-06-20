@@ -252,7 +252,7 @@ impl Weather {
 }
 
 fn main() {
-    println!("{:?}", Weather::weather_forecasting_stone(&Weather::Earthquake))
+    println!("{:?}", weather_forecasting_stone(&Weather::Earthquake))
 }
 ```
 
@@ -285,6 +285,12 @@ fn main() {
 # result (bool)
 - 실패할 가능성이 있는 값을 반환하는 Generic enum
 - 예시 설명 추가 및 예시 코드 변경
+```rust
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+```
 
 ---
 
