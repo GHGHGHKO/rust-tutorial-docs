@@ -11,8 +11,16 @@ marp: true
 # 목차
 1. Rust의 강점
 2. Rust의 단점 (싫어하는 이유)
-3. 코드 및 실습 (Result와 Match)
-4. 활용 예시 코드
+3. 활용 예시 코드 (Result와 Match)
+
+---
+
+# 만들어진 계기
+
+![](https://everipedia.org/cdn-cgi/image/width=384/https://everipedia-storage.s3-accelerate.amazonaws.com/ProfilePics/graydon-hoare__19551.jpeg)
+*Graydon Hoare*
+![bg right w:600 h:600](https://as1.ftcdn.net/v2/jpg/04/91/24/28/1000_F_491242893_QhACDHaEXguCfGlg8WxXiaie5R5pR09L.jpg)
+![bg](https://www.incheonilbo.com/news/photo/201608/719967_245848_3312.jpg)
 
 ---
 
@@ -441,3 +449,5 @@ https://betterprogramming.pub/reading-and-writing-a-file-in-rust-47d2bc7086ac
 https://github.com/dani-garcia/vaultwarden
 
 https://github.com/emacs-ng/deno
+
+https://www.techspot.com/news/97654-how-broken-elevator-led-one-most-loved-programming.html
