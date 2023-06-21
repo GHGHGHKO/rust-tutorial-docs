@@ -353,12 +353,14 @@ fn op_system_memory_info(
 
 # trait
 - Java의 interface와 유사
-- trait bound 설명추가 및 예시 추가 (trait bound)
+- ***trait bound***
+    - Generic type이 어떤 trait을 구현한 타입인지 명시해야 함
+    - 사용하길 원하는 동작을 갖도록 함
 
 ---
 
 # trait 
-
+* vaultwarden(bitwarden)의 db 정보를 불러오는 rust 코드의 일부
 ```rust
 use serde::{de::DeserializeOwned, Serialize};
 
@@ -385,6 +387,9 @@ impl<T: FromDb> FromDb for Option<T> {
         self.map(crate::FromDb::from_db)
     }
 }
+
+// Send : thread safety
+// Serialize, DeserializeOwned : 직렬화, 역직렬화가 가능해야 함
 ```
 
 ---
