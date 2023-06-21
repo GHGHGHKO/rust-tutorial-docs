@@ -307,46 +307,20 @@ error[E0308]: mismatched types
 
 ---
 
-# result (bool)
-```rust
-fn ok_or_err(is_success: bool) -> Result<String, String> {
-    match is_success {
-        true => {
-            Ok(String::from("success!"))
-        }
-        false => {
-            Err(String::from("error!"))
-        }
-    }
-}
-
-fn main() {
-  println!("{:?}", ok_or_err(true)); // Ok("success!")
-}
-```
-
----
-
 # result (파일 읽기)
 
 ```rust
 use std::fs::File;
-use std::io::{Error, Read};
-
-fn read_receipt() -> Result<(), Error> {
-    let file_name = "receipt.txt";
-
-    let mut file = File::open(file_name)?;
-    let mut contents = String::new();
-
-    file.read_to_string(&mut contents)?;
-    print!("{}", contents);
-
-    Ok(())
-}
 
 fn main() {
-  read_receipt().expect("TODO: panic message");
+    let f = File::open("hello.txt");
+
+    let f = match f {
+        Ok(file) => file,
+        Err(error) => {
+            panic!("There was a problem opening the file: {:?}", error)
+        },
+    };
 }
 ```
 
