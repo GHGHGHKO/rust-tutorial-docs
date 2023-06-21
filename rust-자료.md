@@ -360,7 +360,7 @@ fn op_system_memory_info(
 ---
 
 # trait 
-* vaultwarden(bitwarden)의 db 정보를 불러오는 rust 코드의 일부
+* vaultwarden(bitwarden)의 db 데이터를 불러오는 함수
 ```rust
 use serde::{de::DeserializeOwned, Serialize};
 
@@ -395,6 +395,7 @@ impl<T: FromDb> FromDb for Option<T> {
 ---
 
 # trait
+* Person mock 후 사용 예시
 ```rust
 #[derive(Debug, Serialize, Deserialize)]
 struct Person {
