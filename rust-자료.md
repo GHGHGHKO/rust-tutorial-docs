@@ -308,7 +308,7 @@ error[E0308]: mismatched types
 ---
 
 # result (파일 읽기)
-
+* 오류 수정 후
 ```rust
 use std::fs::File;
 
@@ -321,6 +321,31 @@ fn main() {
             panic!("There was a problem opening the file: {:?}", error)
         },
     };
+}
+```
+
+---
+
+# result 
+* emacs의 rust 코드
+```rust
+fn op_system_memory_info(
+  state: &mut OpState,
+) -> Result<Option<MemInfo>, AnyError> {
+  super::check_unstable(state, "Deno.systemMemoryInfo");
+  state.borrow_mut::<Permissions>().env.check_all()?;
+  match sys_info::mem_info() {
+    Ok(info) => Ok(Some(MemInfo {
+      total: info.total,
+      free: info.free,
+      available: info.avail,
+      buffers: info.buffers,
+      cached: info.cached,
+      swap_total: info.swap_total,
+      swap_free: info.swap_free,
+    })),
+    Err(_) => Ok(None),
+  }
 }
 ```
 
