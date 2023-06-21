@@ -284,12 +284,24 @@ fn main() {
 
 # result (bool)
 - 실패할 가능성이 있는 값을 반환하는 Generic enum
-- 예시 설명 추가 및 예시 코드 변경
+- 파일을 읽고 실패(*없는 경우*)할 경우 파일을 생성하는 경우
+
 ```rust
-enum Result<T, E> {
-    Ok(T),
-    Err(E),
+use std::fs::File;
+
+fn main() {
+    let f = File::open("hello.txt");
 }
+
+error[E0308]: mismatched types
+ --> src/main.rs:4:18
+  |
+4 |     let f: u32 = File::open("hello.txt");
+  |                  ^^^^^^^^^^^^^^^^^^^^^^^ expected u32, found enum
+`std::result::Result`
+  |
+  = note: expected type `u32`
+  = note:    found type `std::result::Result<std::fs::File, std::io::Error>`
 ```
 
 ---
@@ -333,7 +345,7 @@ fn read_receipt() -> Result<(), Error> {
 }
 
 fn main() {
-  read_username_from_file().expect("TODO: panic message");
+  read_receipt().expect("TODO: panic message");
 }
 ```
 
