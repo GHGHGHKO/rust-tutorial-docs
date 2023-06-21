@@ -433,9 +433,10 @@ fn main() {
 
 https://rinthel.github.io/rust-lang-book-ko/
 
-https://www.youtube.com/watch?v=V6TR2FeCK5c 
-(Rust 크로스 플랫폼 프로그래밍 | 인프콘 2022)
-
 https://prev.rust-lang.org/ko-KR/faq.html
 
 https://betterprogramming.pub/reading-and-writing-a-file-in-rust-47d2bc7086ac
+
+https://github.com/dani-garcia/vaultwarden
+
+https://github.com/emacs-ng/deno
