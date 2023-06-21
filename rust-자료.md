@@ -231,6 +231,7 @@ fn main() {
 
 # match (enum)
 ```rust
+#[allow(dead_code)]
 pub enum Weather {
     Rain,
     Snowing,
