@@ -19,7 +19,7 @@ marp: true
 
 ![](https://everipedia.org/cdn-cgi/image/width=384/https://everipedia-storage.s3-accelerate.amazonaws.com/ProfilePics/graydon-hoare__19551.jpeg)
 *Graydon Hoare*
-![bg right w:600 h:600](https://as1.ftcdn.net/v2/jpg/04/91/24/28/1000_F_491242893_QhACDHaEXguCfGlg8WxXiaie5R5pR09L.jpg)
+![bg right w:750 h:400](https://www.mowreyelevator.com/wp-content/uploads/2020/11/out-of-order-elevator.jpg)
 ![bg](https://www.incheonilbo.com/news/photo/201608/719967_245848_3312.jpg)
 
 ---
