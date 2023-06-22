@@ -510,3 +510,5 @@ https://github.com/dani-garcia/vaultwarden
 https://github.com/emacs-ng/deno
 
 https://www.techspot.com/news/97654-how-broken-elevator-led-one-most-loved-programming.html
+
+https://survey.stackoverflow.co/2022#section-most-loved-dreaded-and-wanted-programming-scripting-and-markup-languages
