@@ -13,7 +13,7 @@ marp: true
 # 목차
 1. Rust의 강점
 2. Rust의 단점 (싫어하는 이유)
-3. 활용 예시 코드 (Result와 Match)
+3. 활용 예시 코드 (Result, Match, trait)
 
 ---
 
