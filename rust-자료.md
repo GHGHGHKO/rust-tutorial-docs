@@ -54,8 +54,55 @@ error[E0308]: mismatched types
 1. 런타임에 운영체제로부터 메모리가 요청되어야 한다.
 2. String의 사용이 끝났을 때 운영체제에게 메모리를 반납할 방법이 필요하다.
 
+*`String::from`은 힙에 생성됩니다.*
 *러스트는 `}` 괄호가 닫힐때 자동적으로 `drop`을 호출합니다.*
 
+
+---
+
+# Ownership 잠깐 보기
+- 힙에 생성되는 변수를 다른 변수에 할당할 경우
+- Ownership은 복사되지 않고 (Not Copy)
+- 이동(Move) 된다.
+- 즉, Rust는 각각의 값은 해당 값의 Owner라고 불리는 변수를 딱 하나 가지고 있다.
+- 할당할 때마다 함수에 넘겨주거나, 반환받는건 너무 불편하다!
+    * *Reference/Borrow*
+
+---
+
+# Ownership 예제 코드
+```rust
+pub fn fail_move_ownership() {
+    let i_am_on_stack: &str = "7427466391.com";
+    let me_too = i_am_on_stack;
+
+    println!("i_am_on_stack is {}", i_am_on_stack);
+    println!("me_too is {}", me_too);
+
+    let i_am_on_heap = String::from("Ferris");
+    let me_too = i_am_on_heap;
+
+    println!("i_am_on_heap is {}", i_am_on_heap);
+    println!("me_too is {}", me_too);
+}
+
+error[E0382]: borrow of moved value: `i_am_on_heap`
+  --> src\ownership\ownership.rs:11:31
+   |
+8  |     let i_am_on_heap = String::from("Ferris");
+   |         ------------ move occurs because `i_am_on_heap` has type `std::string::String`, which does not implement the `Copy` trait
+9  |     let me_too = i_am_on_heap;
+   |                  ------------ value moved here
+10 |
+11 |     let i_am_on_heap_length = i_am_on_heap.len();
+   |                               ^^^^^^^^^^^^^^^^^^ value borrowed here after move
+   |
+help: consider cloning the value if the performance cost is acceptable
+   |
+9  |     let me_too = i_am_on_heap.clone();
+   |                              ++++++++
+
+```
 
 ---
 
@@ -185,16 +232,15 @@ error: cannot borrow immutable borrowed content `*some_string` as mutable
 ---
 
 # 가변 참조자(Mutable References, data race 방지)
-1. 두 개 이상의 포인터가 동시에 같은 데이터에 접근한다.
-2. 그 중 적어도 하나의 포인터가 데이터를 쓴다.
-3. 데이터에 접근하는데 동기화를 하는 어떠한 메커니즘도 없다.
+1. 어떤 변수에 대해 실제 사용되는 읽기 전용 참조는 여러 개 존재할 수 있다.
+2. 어떤 변수에 대해 실제 사용되는 변경 가능 참조는 단 한 개만 존재할 수 있다.
+3. 어떤 변수에 대해 실제 사용되는 변경 가능 참조와, 실제 사용되는 읽기 전용 참조는 동시에 존재할 수 없다.
 ```rust
 let mut s = String::from("hello");
 
 let r1 = &mut s;
 let r2 = &mut s;
-```
-```
+
 error[E0499]: cannot borrow `s` as mutable more than once at a time
  --> borrow_twice.rs:5:19
   |
