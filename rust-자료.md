@@ -2,9 +2,8 @@
 marp: true
 ---
 
-# Rust와 예외, 에러 관리
-
-### Result와 Match
+# Rust 찍어먹기
+# Let's get Rusty
 
 ---
 
@@ -31,7 +30,8 @@ marp: true
     * `let or let mut`
 3. **철저한 예외나 에러 관리** (Result, match)
     * *Ok( ), Err( ), **panic!*** 명시적으로 작성
-4. 정확한 오류 지적
+4. 눈물 없이는 볼 수 없는 **감동적인 컴파일 에러 메시지**
+    * 아래 예제에서 느낄 수 있습니다.
 ```rust
 error[E0308]: mismatched types
   --> src\client\tenor_client.rs:39:17
