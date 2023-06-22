@@ -60,16 +60,6 @@ error[E0308]: mismatched types
 
 ---
 
-# Ownership 잠깐 보기
-- 힙에 생성되는 변수를 다른 변수에 할당할 경우
-- Ownership은 복사되지 않고 (Not Copy)
-- 이동(Move) 된다.
-- 즉, Rust는 각각의 값은 해당 값의 Owner라고 불리는 변수를 딱 하나 가지고 있다.
-- 할당할 때마다 함수에 넘겨주거나, 반환받는건 너무 불편하다!
-    * *Reference/Borrow*
-
----
-
 # 변수 선언, 불변성
 1. 기본 변수는 immutable (불변)
     * 가변은 *가끔* 값을 나중에 변경하면 찾기가 어려움
@@ -120,6 +110,16 @@ error[E0384]: re-assignment of immutable variable `x`
 
     let signed_int = 0xff_ff_ff_ff_ff; // type i32 ???
 ```
+
+---
+
+# Ownership 잠깐 보기
+- 힙에 생성되는 변수를 다른 변수에 할당할 경우
+- Ownership은 복사되지 않고 (Not Copy)
+- 이동(Move) 된다.
+- 즉, Rust는 각각의 값은 해당 값의 Owner라고 불리는 변수를 딱 하나 가지고 있다.
+- 할당할 때마다 함수에 넘겨주거나, 반환받는건 너무 불편하다!
+    * *Reference/Borrow*
 
 ---
 
