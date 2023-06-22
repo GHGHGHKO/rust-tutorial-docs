@@ -70,6 +70,29 @@ error[E0308]: mismatched types
 
 ---
 
+# 변수의 불변성
+ * 기본 변수는 immutable (불변)
+```rust
+fn main() {
+    let x = 5; // let mut x = 5;
+    println!("The value of x is: {}", x);
+    x = 6;
+    println!("The value of x is: {}", x);
+}
+```
+```rust
+error[E0384]: re-assignment of immutable variable `x`
+ --> src/main.rs:4:5
+  |
+2 |     let x = 5;
+  |         - first assignment to `x`
+3 |     println!("The value of x is: {}", x);
+4 |     x = 6;
+  |     ^^^^^ re-assignment of immutable variable
+  ```
+
+---
+
 # 자동 추론 (타입 추론)
 
  * let 키워드를 사용하여 타입 자동 추론
@@ -102,29 +125,6 @@ error[E0308]: mismatched types
 3. 비동기 프로그래밍은 어렵다
     * 비동기에 특화되어있지만 비동기는 *어렵다*
     * *Tokio*, *QUIC*, *WebFlux* 등
-
----
-
-# 변수의 불변성
- * 기본 변수는 immutable (불변)
-```rust
-fn main() {
-    let x = 5; // let mut x = 5;
-    println!("The value of x is: {}", x);
-    x = 6;
-    println!("The value of x is: {}", x);
-}
-```
-```rust
-error[E0384]: re-assignment of immutable variable `x`
- --> src/main.rs:4:5
-  |
-2 |     let x = 5;
-  |         - first assignment to `x`
-3 |     println!("The value of x is: {}", x);
-4 |     x = 6;
-  |     ^^^^^ re-assignment of immutable variable
-  ```
 
 ---
 
