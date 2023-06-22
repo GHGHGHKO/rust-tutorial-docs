@@ -6,7 +6,7 @@ marp: true
 ## Let's get Rusty
 
 ![](https://www.rust-lang.org/static/images/rust-logo-blk.svg)
-![bg right w:700](https://pbs.twimg.com/media/ELO0ClVUEAIAaWC?format=jpg&name=medium)
+![bg right:60% w:800](https://pbs.twimg.com/media/ELO0ClVUEAIAaWC?format=jpg&name=medium)
 
 ---
 
@@ -21,8 +21,8 @@ marp: true
 
 ![](https://everipedia.org/cdn-cgi/image/width=384/https://everipedia-storage.s3-accelerate.amazonaws.com/ProfilePics/graydon-hoare__19551.jpeg)
 *Graydon Hoare*
-![bg right w:750 h:400](https://www.mowreyelevator.com/wp-content/uploads/2020/11/out-of-order-elevator.jpg)
-![bg](https://www.incheonilbo.com/news/photo/201608/719967_245848_3312.jpg)
+![bg right:33% w:750 h:400](https://www.mowreyelevator.com/wp-content/uploads/2020/11/out-of-order-elevator.jpg)
+![bg right:50%](https://www.incheonilbo.com/news/photo/201608/719967_245848_3312.jpg)
 
 ---
 
@@ -175,15 +175,16 @@ help: consider cloning the value if the performance cost is acceptable
 ---
 
 
-# 단점 (혹은 싫어하는 이유)
+# 단점 (싫어하는 이유)
 
 1. 엄격한 타입
     * ***참조자(References)와 빌림(Borrowing)***
 2. 생태계와 라이브러리
-    * 메이저한 언어(Java, C++, Python ..)에 비해 정보가 부족
+    * 메이저한 언어(Java, C++, Python ..)에 비해 정보 부족
 3. 비동기 프로그래밍은 어렵다
     * 비동기에 특화되어있지만 비동기는 *어렵다*
     * *Tokio*, *QUIC*, *WebFlux* 등
+![bg right w:650](https://i.imgur.com/GvZnY9n.png)
 
 ---
 
