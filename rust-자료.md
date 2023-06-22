@@ -70,62 +70,11 @@ error[E0308]: mismatched types
 
 ---
 
-# Ownership 예제 코드
-```rust
-pub fn fail_move_ownership() {
-    let i_am_on_stack: &str = "7427466391.com";
-    let me_too = i_am_on_stack;
-
-    println!("i_am_on_stack is {}", i_am_on_stack);
-    println!("me_too is {}", me_too);
-
-    let i_am_on_heap = String::from("Ferris");
-    print_function(i_am_on_heap);
-
-    let me_too = i_am_on_heap;
-    print_function(me_too);
-}
-
-fn print_function(name: String) {
-    println!("{}", name);
-}
-
-error[E0382]: use of moved value: `i_am_on_heap`
-  --> src\ownership\ownership.rs:11:18
-   |
-8  |     let i_am_on_heap = String::from("Ferris");
-   |         ------------ move occurs because `i_am_on_heap` has type `std::string::String`, which does not implement the `Copy` trait
-9  |     print_function(i_am_on_heap);
-   |                    ------------ value moved here
-10 |
-11 |     let me_too = i_am_on_heap;
-   |                  ^^^^^^^^^^^^ value used here after move
-   |
-note: consider changing this parameter type in function `print_function` to borrow instead if owning the value isn't necessary
-  --> src\ownership\ownership.rs:15:25
-   |
-15 | fn print_function(name: String) {
-   |    --------------       ^^^^^^ this parameter takes ownership of the value
-   |    |
-   |    in this function
-help: consider cloning the value if the performance cost is acceptable
-   |
-9  |     print_function(i_am_on_heap.clone());
-   |                                ++++++++
-
-
-```
-
----
-
 # 변수 선언, 불변성
 1. 기본 변수는 immutable (불변)
     * 가변은 *가끔* 값을 나중에 변경하면 찾기가 어려움
 2. let 키워드를 사용하여 타입 자동 추론
     * 변수 타입에 대한 오류를 미리 감지함
-3. Shadowing
-    * 변수의 재사용과 값의 재정의
-    * *이전 값을 재사용하는 실수를 방지*
 
 ---
 
@@ -170,6 +119,54 @@ error[E0384]: re-assignment of immutable variable `x`
         .unwrap_or_else(|_| String::from("<default_api_key>")); // type String
 
     let signed_int = 0xff_ff_ff_ff_ff; // type i32 ???
+```
+
+---
+
+# Ownership 예제 코드
+```rust
+pub fn fail_move_ownership() {
+    let i_am_on_stack: &str = "7427466391.com";
+    let me_too = i_am_on_stack;
+
+    println!("i_am_on_stack is {}", i_am_on_stack);
+    println!("me_too is {}", me_too);
+
+    let i_am_on_heap = String::from("Ferris");
+    print_function(i_am_on_heap);
+
+    let me_too = i_am_on_heap;
+    print_function(me_too);
+}
+
+fn print_function(name: String) {
+    println!("{}", name);
+}
+
+error[E0382]: use of moved value: `i_am_on_heap`
+  --> src\ownership\ownership.rs:11:18
+   |
+8  |     let i_am_on_heap = String::from("Ferris");
+   |         ------------ move occurs because `i_am_on_heap` has type `std::string::String`, which does not implement the `Copy` trait
+9  |     print_function(i_am_on_heap);
+   |                    ------------ value moved here
+10 |
+11 |     let me_too = i_am_on_heap;
+   |                  ^^^^^^^^^^^^ value used here after move
+   |
+note: consider changing this parameter type in function `print_function` to borrow instead if owning the value isn't necessary
+  --> src\ownership\ownership.rs:15:25
+   |
+15 | fn print_function(name: String) {
+   |    --------------       ^^^^^^ this parameter takes ownership of the value
+   |    |
+   |    in this function
+help: consider cloning the value if the performance cost is acceptable
+   |
+9  |     print_function(i_am_on_heap.clone());
+   |                                ++++++++
+
+
 ```
 
 ---
