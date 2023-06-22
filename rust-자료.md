@@ -3,7 +3,10 @@ marp: true
 ---
 
 # Rust 찍어먹기
-# Let's get Rusty
+## Let's get Rusty
+
+![](https://www.rust-lang.org/static/images/rust-logo-blk.svg)
+![bg right w:700](https://pbs.twimg.com/media/ELO0ClVUEAIAaWC?format=jpg&name=medium)
 
 ---
 
