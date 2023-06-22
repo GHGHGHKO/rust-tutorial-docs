@@ -30,7 +30,7 @@ marp: true
     * `let or let mut`
 3. **철저한 예외나 에러 관리** (Result, match)
     * *Ok( ), Err( ), **panic!*** 명시적으로 작성
-4. 눈물 없이는 볼 수 없는 **감동적인 컴파일 에러 메시지**
+4. 눈물 없이는 볼 수 없는 ***감동적인 컴파일 에러 메시지***
     * 아래 예제에서 느낄 수 있습니다.
 ```rust
 error[E0308]: mismatched types
@@ -80,27 +80,39 @@ pub fn fail_move_ownership() {
     println!("me_too is {}", me_too);
 
     let i_am_on_heap = String::from("Ferris");
-    let me_too = i_am_on_heap;
+    print_function(i_am_on_heap);
 
-    println!("i_am_on_heap is {}", i_am_on_heap);
-    println!("me_too is {}", me_too);
+    let me_too = i_am_on_heap;
+    print_function(me_too);
 }
 
-error[E0382]: borrow of moved value: `i_am_on_heap`
-  --> src\ownership\ownership.rs:11:31
+fn print_function(name: String) {
+    println!("{}", name);
+}
+
+error[E0382]: use of moved value: `i_am_on_heap`
+  --> src\ownership\ownership.rs:11:18
    |
 8  |     let i_am_on_heap = String::from("Ferris");
    |         ------------ move occurs because `i_am_on_heap` has type `std::string::String`, which does not implement the `Copy` trait
-9  |     let me_too = i_am_on_heap;
-   |                  ------------ value moved here
+9  |     print_function(i_am_on_heap);
+   |                    ------------ value moved here
 10 |
-11 |     let i_am_on_heap_length = i_am_on_heap.len();
-   |                               ^^^^^^^^^^^^^^^^^^ value borrowed here after move
+11 |     let me_too = i_am_on_heap;
+   |                  ^^^^^^^^^^^^ value used here after move
    |
+note: consider changing this parameter type in function `print_function` to borrow instead if owning the value isn't necessary
+  --> src\ownership\ownership.rs:15:25
+   |
+15 | fn print_function(name: String) {
+   |    --------------       ^^^^^^ this parameter takes ownership of the value
+   |    |
+   |    in this function
 help: consider cloning the value if the performance cost is acceptable
    |
-9  |     let me_too = i_am_on_heap.clone();
-   |                              ++++++++
+9  |     print_function(i_am_on_heap.clone());
+   |                                ++++++++
+
 
 ```
 
