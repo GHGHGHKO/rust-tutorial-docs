@@ -512,3 +512,5 @@ https://github.com/emacs-ng/deno
 https://www.techspot.com/news/97654-how-broken-elevator-led-one-most-loved-programming.html
 
 https://survey.stackoverflow.co/2022#section-most-loved-dreaded-and-wanted-programming-scripting-and-markup-languages
+
+https://github.com/HomoEfficio/dev-tips/blob/59409afe4f0378f6404e85c3afeb6f4734551a41/Rust%20%EB%A7%9B%EB%B3%B4%EA%B8%B0.md
