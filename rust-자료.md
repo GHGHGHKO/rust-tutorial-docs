@@ -11,16 +11,20 @@ marp: true
 ---
 
 # 목차
-1. Rust의 강점
-2. Rust의 단점 (싫어하는 이유)
-3. 활용 예시 코드 (Result, Match, trait)
+1. 워밍업
+    1. Rust의 강점
+    2. Rust의 단점 (싫어하는 이유)
+2. Rust의 매력
+    1. match
+    2. result
+    3. trait
 
 ---
 
 # 만들어진 계기
 
 ![](https://everipedia.org/cdn-cgi/image/width=384/https://everipedia-storage.s3-accelerate.amazonaws.com/ProfilePics/graydon-hoare__19551.jpeg)
-*Graydon Hoare*
+Mozilla developer *Graydon Hoare*
 ![bg right:33% w:750 h:400](https://www.mowreyelevator.com/wp-content/uploads/2020/11/out-of-order-elevator.jpg)
 ![bg right:50%](https://www.incheonilbo.com/news/photo/201608/719967_245848_3312.jpg)
 
@@ -30,8 +34,8 @@ marp: true
 1. 안전한 메모리 관리 (Ownership)
     * ex) 변수가 스코프 밖으로 벗어나면 값이 버려짐(drop 호출)
 2. 불변성 
-    * `let or let mut`
-3. **철저한 예외나 에러 관리** (Result, match)
+    * ex) `let or let mut`
+3. 예외와 에러 관리 (Result, match)
     * *Ok( ), Err( ), **panic!*** 명시적으로 작성
 4. 눈물 없이는 볼 수 없는 ***감동적인 컴파일 에러 메시지***
     * 아래 예제에서 느낄 수 있습니다.
@@ -132,8 +136,8 @@ pub fn fail_move_ownership() {
     let i_am_on_stack: &str = "7427466391.com";
     let me_too = i_am_on_stack;
 
-    println!("i_am_on_stack is {}", i_am_on_stack);
-    println!("me_too is {}", me_too);
+    println!("i_am_on_stack is {}", i_am_on_stack); //i_am_on_stack is 7427466391.com
+    println!("me_too is {}", me_too); // me_too is 7427466391.com
 
     let i_am_on_heap = String::from("Ferris");
     print_function(i_am_on_heap);
