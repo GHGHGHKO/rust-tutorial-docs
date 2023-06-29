@@ -161,7 +161,7 @@ error[E0384]: re-assignment of immutable variable `x`
 
 ---
 
-# 참조자(References)
+# 참조자(References) // todo 문자열 -> 숫자로 변경
 
 1. `&`기호가 참조자를 의미
 2. **소유권**(Ownership)을 넘기지 않고 참조 가능
@@ -181,7 +181,7 @@ fn calculate_length(s: &String) -> usize { // s는 String의 참조자입니다
 
 ---
 
-# 빌림(Borrowing)
+# 빌림(Borrowing) // todo 문자열 -> 숫자로 변경
 
 1. 함수의 파라미터로 참조자를 만드는 것을 ***빌림***이라고 함
 2. 빌리고 용무가 끝나면 돌려주어야함
@@ -193,7 +193,7 @@ fn calculate_length(s: &String) -> usize {
 ```
 ---
 
-# 빌림(Borrowing)
+# 빌림(Borrowing) // todo 문자열 -> 숫자로 변경
 
 * 변수가 불변인 것 처럼 참조자도 불변
 ```rust
