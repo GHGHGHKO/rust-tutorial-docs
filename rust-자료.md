@@ -123,11 +123,9 @@ help: consider cloning the value if the performance cost is acceptable
 
 ---
 
-# 변수 선언, 불변성
+# 불변성
 1. 기본 변수는 immutable (불변)
     * 가변은 *가끔* 값을 나중에 변경하면 찾기가 어려움
-2. let 키워드를 사용하여 타입 자동 추론
-    * 변수 타입에 대한 오류를 미리 감지함
 
 ---
 
