@@ -154,13 +154,6 @@ error[E0384]: re-assignment of immutable variable `x`
 
 ---
 
-# 단점 (싫어하는 이유)
-
-1. 엄격한 타입
-    * ***참조자(References)와 빌림(Borrowing)***
-
----
-
 # 참조자(References) // todo 문자열 -> 숫자로 변경
 
 1. `&`기호가 참조자를 의미
