@@ -31,12 +31,11 @@ Mozilla developer *Graydon Hoare*
 ---
 
 # Rust의 강점
-1. 안전한 메모리 관리 (Ownership)
-    * ex) 변수가 스코프 밖으로 벗어나면 값이 버려짐(drop 호출)
-2. 불변성 
-    * ex) `let or let mut`
-3. 예외와 에러 관리 (Result, match)
-    * *Ok( ), Err( ), **panic!*** 명시적으로 작성
+1. 안전한 메모리 관리
+2. Ownership
+3. 불변성 
+4. Shadowing
+3. 예외와 에러 관리 (match, option, result)
 4. 눈물 없이는 볼 수 없는 ***감동적인 컴파일 에러 메시지***
     * 아래 예제에서 느낄 수 있습니다.
 ```rust
