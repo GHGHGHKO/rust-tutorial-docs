@@ -356,7 +356,7 @@ fn main() {
 ---
 
 # result 
-* emacs의 rust 코드
+* `emacs`의 rust 코드
 ```rust
 fn op_system_memory_info(
   state: &mut OpState,
