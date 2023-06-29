@@ -158,12 +158,6 @@ error[E0384]: re-assignment of immutable variable `x`
 
 1. 엄격한 타입
     * ***참조자(References)와 빌림(Borrowing)***
-2. 생태계와 라이브러리
-    * 메이저한 언어(Java, C++, Python ..)에 비해 정보 부족
-3. 비동기 프로그래밍은 어렵다
-    * 비동기에 특화되어있지만 비동기는 *어렵다*
-    * *Tokio*, *QUIC*, *WebFlux* 등
-![bg right w:650](https://i.imgur.com/GvZnY9n.png)
 
 ---
 
@@ -377,6 +371,18 @@ fn op_system_memory_info(
   }
 }
 ```
+
+---
+
+# 느낀점
+
+1. Fast and Safe
+    * 메모리 문제를 겪는 프로젝트가 Rust 넘어가고 있음 (Windows)
+2. 생태계와 라이브러리
+    * 메이저한 언어(Java, C++, Python ..)에 비해 정보 부족
+3. 동시성에 특화되어있는 언어
+    * 그 중 비동기 프로그래밍은 너무 어려움
+![bg right w:650](https://i.imgur.com/GvZnY9n.png)
 
 ---
 
