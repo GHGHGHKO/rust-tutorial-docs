@@ -12,12 +12,11 @@ marp: true
 
 # 목차
 1. 워밍업
-    1. Rust의 강점
-    2. Rust의 단점 (싫어하는 이유)
+    * Rust의 강점
 2. Rust의 매력
-    1. match
-    2. option
-    3. result
+    * match
+    * option
+    * result
 3. `emacs`의 rust 코드 구경하기
 
 ---
