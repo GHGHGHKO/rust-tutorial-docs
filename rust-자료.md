@@ -271,6 +271,30 @@ error[E0499]: cannot borrow `s` as mutable more than once at a time
 # match
 - switch와 비슷하지만, match는 모든 케이스를 표현해야함 (안전성)
 - `if`, `else if`, `else`를 가독성 있게 변경
+
+---
+
+# match (tuple)
+```rust
+fn serve_coffee(coffee: bool, ice: bool, water: bool) -> &str {
+    match (coffee, ice, water) {
+        (false, _, _) => "차가운 물만 드세요",
+        (_, false, _) => "따뜻한 아메리카노를 드세요",
+        (_, _, false) => "아이스 에스프레소를 드세요",
+        _ => "아이스 아메리카노를 드세요",
+    }
+}
+
+fn main() {
+    let coffee = true;
+    let ice = false;
+    let water = true;
+
+    let drink = serve_coffee(coffee, ice, water);
+    println!("Serve: {}", drink); // Serve: 따뜻한 아메리카노를 드세요
+}
+```
+
 ---
 
 # match (enum)
@@ -298,30 +322,6 @@ impl Weather {
 
 fn main() {
     println!("{:?}", weather_forecasting_stone(&Weather::Earthquake))
-}
-```
-
-
----
-
-# match (tuple)
-```rust
-fn serve_coffee(coffee: bool, ice: bool, water: bool) -> &str {
-    match (coffee, ice, water) {
-        (false, _, _) => "차가운 물만 드세요",
-        (_, false, _) => "따뜻한 아메리카노를 드세요",
-        (_, _, false) => "아이스 에스프레소를 드세요",
-        _ => "아이스 아메리카노를 드세요",
-    }
-}
-
-fn main() {
-    let coffee = true;
-    let ice = false;
-    let water = true;
-
-    let drink = serve_coffee(coffee, ice, water);
-    println!("Serve: {}", drink); // Serve: 따뜻한 아메리카노를 드세요
 }
 ```
 
