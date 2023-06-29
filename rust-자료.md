@@ -152,28 +152,6 @@ error[E0384]: re-assignment of immutable variable `x`
 
 ---
 
-# 자동 추론 (타입 추론)
-
- * let 키워드를 사용하여 타입 자동 추론
-```rust
-    let unsigned_int = 123_u32; // type u32
-
-    let a: u64 = 123; // type u64
-    
-    let pi = 3.14159265358979323846264338327950288; // type f64
-    
-    let small_pi : f32 = 3.14; // type f32
-
-    let url = "https://httpbin.org/ip"; // type &str
-
-    let tenor_key = env::var("TENOR_API_KEY")
-        .unwrap_or_else(|_| String::from("<default_api_key>")); // type String
-
-    let signed_int = 0xff_ff_ff_ff_ff; // type i32 ???
-```
-
----
-
 # 단점 (싫어하는 이유)
 
 1. 엄격한 타입
@@ -262,6 +240,28 @@ error[E0499]: cannot borrow `s` as mutable more than once at a time
   |                   ^ second mutable borrow occurs here
 6 | }
   | - first borrow ends here
+```
+
+---
+
+# 자동 추론 (타입 추론)
+
+ * let 키워드를 사용하여 타입 자동 추론
+```rust
+    let unsigned_int = 123_u32; // type u32
+
+    let a: u64 = 123; // type u64
+    
+    let pi = 3.14159265358979323846264338327950288; // type f64
+    
+    let small_pi : f32 = 3.14; // type f32
+
+    let url = "https://httpbin.org/ip"; // type &str
+
+    let tenor_key = env::var("TENOR_API_KEY")
+        .unwrap_or_else(|_| String::from("<default_api_key>")); // type String
+
+    let signed_int = 0xff_ff_ff_ff_ff; // type i32 ???
 ```
 
 ---
