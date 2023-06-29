@@ -16,7 +16,9 @@ marp: true
     2. Rust의 단점 (싫어하는 이유)
 2. Rust의 매력
     1. match
-    2. result
+    2. option
+    3. result
+3. `emacs`의 rust 코드 구경하기
 
 ---
 
