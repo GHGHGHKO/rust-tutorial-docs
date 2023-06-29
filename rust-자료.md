@@ -17,7 +17,6 @@ marp: true
 2. Rust의 매력
     1. match
     2. result
-    3. trait
 
 ---
 
@@ -415,85 +414,6 @@ fn op_system_memory_info(
     })),
     Err(_) => Ok(None),
   }
-}
-```
-
----
-
-# trait
-- Java의 interface와 유사
-- ***trait bound***
-    - Generic type이 어떤 trait을 구현한 타입인지 명시해야 함
-    - 사용하길 원하는 동작을 갖도록 함
-
----
-
-# trait 
-* vaultwarden(bitwarden)의 db 데이터를 불러오는 함수
-```rust
-use serde::{de::DeserializeOwned, Serialize};
-
-pub trait FromDb {
-    type Output;
-    #[allow(clippy::wrong_self_convention)]
-    fn from_db(self) -> Self::Output;
-}
-
-impl<T: FromDb> FromDb for Vec<T> where T: Send + Serialize + DeserializeOwned {
-    type Output = Vec<T::Output>;
-    #[allow(clippy::wrong_self_convention)]
-    #[inline(always)]
-    fn from_db(self) -> Self::Output {
-        self.into_iter().map(FromDb::from_db).collect()
-    }
-}
-
-impl<T: FromDb> FromDb for Option<T> {
-    type Output = Option<T::Output>;
-    #[allow(clippy::wrong_self_convention)]
-    #[inline(always)]
-    fn from_db(self) -> Self::Output {
-        self.map(crate::FromDb::from_db)
-    }
-}
-
-// Send : thread safety
-// Serialize, DeserializeOwned : 직렬화, 역직렬화가 가능해야 함
-```
-
----
-
-# trait
-* Person mock 후 사용 예시
-```rust
-#[derive(Debug, Serialize, Deserialize)]
-struct Person {
-    name: String,
-    age: u32,
-}
-
-impl FromDb for Person {
-    type Output = Self;
-
-    fn from_db(self) -> Self::Output {
-        self
-    }
-}
-
-fn main() {
-    let persons: Vec<Person> = vec![
-        Person { name: "John".to_string(), age: 30 },
-        Person { name: "Jane".to_string(), age: 25 },
-        Person { name: "Mike".to_string(), age: 40 },
-    ];
-
-    let persons_output: Vec<Person> = FromDb::from_db(persons);
-    println!("{:?}", persons_output);
-
-    let person: Option<Person> = Some(Person { name: "Alice".to_string(), age: 35 });
-
-    let person_output: Option<Person> = FromDb::from_db(person);
-    println!("{:?}", person_output);
 }
 ```
 
