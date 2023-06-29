@@ -48,7 +48,7 @@ error[E0308]: mismatched types
 
 ---
 
-# 메모리와 할당
+# 안전한 메모리 관리
 ```rust
 {
     let s = String::from("hello"); // s는 여기서부터 유효합니다
@@ -66,60 +66,7 @@ error[E0308]: mismatched types
 
 ---
 
-# 변수 선언, 불변성
-1. 기본 변수는 immutable (불변)
-    * 가변은 *가끔* 값을 나중에 변경하면 찾기가 어려움
-2. let 키워드를 사용하여 타입 자동 추론
-    * 변수 타입에 대한 오류를 미리 감지함
-
----
-
-# 변수의 불변성
- * 기본 변수는 immutable (불변)
-```rust
-fn main() {
-    let x = 5; // let mut x = 5;
-    println!("The value of x is: {}", x);
-    x = 6;
-    println!("The value of x is: {}", x);
-}
-```
-```rust
-error[E0384]: re-assignment of immutable variable `x`
- --> src/main.rs:4:5
-  |
-2 |     let x = 5;
-  |         - first assignment to `x`
-3 |     println!("The value of x is: {}", x);
-4 |     x = 6;
-  |     ^^^^^ re-assignment of immutable variable
-  ```
-
----
-
-# 자동 추론 (타입 추론)
-
- * let 키워드를 사용하여 타입 자동 추론
-```rust
-    let unsigned_int = 123_u32; // type u32
-
-    let a: u64 = 123; // type u64
-    
-    let pi = 3.14159265358979323846264338327950288; // type f64
-    
-    let small_pi : f32 = 3.14; // type f32
-
-    let url = "https://httpbin.org/ip"; // type &str
-
-    let tenor_key = env::var("TENOR_API_KEY")
-        .unwrap_or_else(|_| String::from("<default_api_key>")); // type String
-
-    let signed_int = 0xff_ff_ff_ff_ff; // type i32 ???
-```
-
----
-
-# Ownership 잠깐 보기
+# Ownership
 - 힙에 생성되는 변수를 다른 변수에 할당할 경우
 - Ownership은 복사되지 않고 (Not Copy)
 - 이동(Move) 된다.
@@ -177,6 +124,58 @@ help: consider cloning the value if the performance cost is acceptable
 
 ---
 
+# 변수 선언, 불변성
+1. 기본 변수는 immutable (불변)
+    * 가변은 *가끔* 값을 나중에 변경하면 찾기가 어려움
+2. let 키워드를 사용하여 타입 자동 추론
+    * 변수 타입에 대한 오류를 미리 감지함
+
+---
+
+# 변수의 불변성
+ * 기본 변수는 immutable (불변)
+```rust
+fn main() {
+    let x = 5; // let mut x = 5;
+    println!("The value of x is: {}", x);
+    x = 6;
+    println!("The value of x is: {}", x);
+}
+```
+```rust
+error[E0384]: re-assignment of immutable variable `x`
+ --> src/main.rs:4:5
+  |
+2 |     let x = 5;
+  |         - first assignment to `x`
+3 |     println!("The value of x is: {}", x);
+4 |     x = 6;
+  |     ^^^^^ re-assignment of immutable variable
+  ```
+
+---
+
+# 자동 추론 (타입 추론)
+
+ * let 키워드를 사용하여 타입 자동 추론
+```rust
+    let unsigned_int = 123_u32; // type u32
+
+    let a: u64 = 123; // type u64
+    
+    let pi = 3.14159265358979323846264338327950288; // type f64
+    
+    let small_pi : f32 = 3.14; // type f32
+
+    let url = "https://httpbin.org/ip"; // type &str
+
+    let tenor_key = env::var("TENOR_API_KEY")
+        .unwrap_or_else(|_| String::from("<default_api_key>")); // type String
+
+    let signed_int = 0xff_ff_ff_ff_ff; // type i32 ???
+```
+
+---
 
 # 단점 (싫어하는 이유)
 
