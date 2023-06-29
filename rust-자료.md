@@ -15,7 +15,7 @@ marp: true
     * Rust의 강점
 2. Rust의 매력
     * match
-    * option
+    * option // todo 추가해야함
     * result
 3. `emacs`의 rust 코드 구경하기
 
