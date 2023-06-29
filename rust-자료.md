@@ -273,30 +273,6 @@ error[E0499]: cannot borrow `s` as mutable more than once at a time
 - `if`, `else if`, `else`를 가독성 있게 변경
 ---
 
-# match
-
-```rust
-fn find_prime_number(number: u32) {
-    match number {
-        1 => println!("{} 은 1입니다.", number),
-
-        2 | 3 | 5 => println!("{} 은 prime number입니다.", number),
-
-        4..=10 => println!("{} 은 4~10 사이의 숫자입니다.", number),
-
-        n if n % 2 == 0 => println!("{} 은 짝수입니다.", number),
-
-        _ => println!("{} 은 알 수 없는 숫자입니다!", number),
-    }
-}
-
-fn main() {
-    find_prime_number(5); // 5 is a prime number!
-}
-```
-
----
-
 # match (enum)
 ```rust
 #[allow(dead_code)]
