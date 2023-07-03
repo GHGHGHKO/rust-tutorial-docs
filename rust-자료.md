@@ -423,7 +423,7 @@ fn op_system_memory_info(
 # 느낀점
 
 1. Fast and Safe
-    * 메모리 문제를 겪는 프로젝트가 Rust 넘어가고 있음 (Windows)
+    * 메모리 문제를 겪는 프로젝트가 Rust 넘어가고 있음
 2. 생태계와 라이브러리
     * 메이저한 언어(Java, C++, Python ..)에 비해 정보 부족
 3. 동시성에 특화되어있는 언어
