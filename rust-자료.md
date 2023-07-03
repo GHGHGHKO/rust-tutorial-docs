@@ -33,8 +33,8 @@ Mozilla developer *Graydon Hoare*
 # Rust의 강점
 1. 안전한 메모리 관리
 2. Ownership
-3. 불변성  // todo 내용 추가해야함
-4. Shadowing // todo 내용 추가해야함
+3. 불변성
+4. Shadowing
 3. 예외와 에러 관리 (match, option, result) // option 추가해야함
 4. 눈물 없이는 볼 수 없는 ***감동적인 컴파일 에러 메시지***
     * 아래 예제에서 느낄 수 있습니다.
@@ -143,6 +143,18 @@ error[E0384]: re-assignment of immutable variable `x`
 4 |     x = 6;
   |     ^^^^^ re-assignment of immutable variable
   ```
+
+---
+
+# Shadowing
+
+1. 이전에 선언한 변수와 같은 이름의 *새 변수*를 선언 할 수 있음
+```rust
+let mut vec = Vec::new();
+vec.push(1i);
+vec.push(2i);
+let vec = vec;
+```
 
 ---
 
