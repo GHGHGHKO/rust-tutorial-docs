@@ -313,6 +313,45 @@ fn main() {
 
 ---
 
+# Option
+1. `null`이거나 `null`이 아닐 때 사용
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+```
+
+---
+
+# Option 예제 코드
+```rust
+fn find_element_index(arr: &[i32], target: i32) -> Option<usize> {
+    for (index, &element) in arr.iter().enumerate() {
+        if element == target {
+            return Some(index);
+        }
+    }
+    None
+}
+
+fn main() {
+    let numbers = [1, 2, 3, 4, 5];
+    let target = 3;
+
+    let index = find_element_index(&numbers, target);
+    match index {
+        Some(i) => println!("target: `{target}`의 위치는: {i}"),
+        None => println!("원하는 숫자를 찾지 못했습니다!"),
+    }
+    // target: `3`의 위치는: 2
+}
+```
+
+---
+
+---
+
 # result (bool)
 - 실패할 가능성이 있는 값을 반환하는 Generic enum
 - 파일을 읽고 실패(*없는 경우*)할 경우 파일을 생성하는 경우
