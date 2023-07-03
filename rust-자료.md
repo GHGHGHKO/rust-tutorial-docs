@@ -51,16 +51,21 @@ error[E0308]: mismatched types
 # 안전한 메모리 관리 // todo 문자열 -> 숫자 변경
 ```rust
 {
-    let s = String::from("hello"); // s는 여기서부터 유효합니다
+    let minsu_bank_account = BankAccount { // 민수의 계좌는 여기서부터 유효합니다
+        name: String::from("minsu"), // name: String,
+        balance: 5000,               // balance: u32,
+        has_credit_card: false,      // has_credit_card: bool
+        account_history: vec![4000, -6000, 3000] // Vec<i32>
+    };
 
-    // s를 가지고 뭔가 합니다
-}                                  // 이 스코프는 끝났고, s는 더 이상 
+    // 민수의 계좌로 뭔가 합니다
+}                                  // 이 스코프는 끝났고, 민수의 계좌는 더 이상 
                                    // 유효하지 않습니다
 ```
 1. 런타임에 운영체제로부터 메모리가 요청되어야 한다.
 2. String의 사용이 끝났을 때 운영체제에게 메모리를 반납할 방법이 필요하다.
 
-*`String::from`은 힙에 생성됩니다.*
+*`String::from`, `Vec<i32>`은 힙에 생성됩니다.*
 *러스트는 `}` 괄호가 닫힐때 자동적으로 `drop`을 호출합니다.*
 
 
