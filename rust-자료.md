@@ -15,7 +15,7 @@ marp: true
     * Rust의 강점
 2. Rust의 매력
     * match
-    * option // todo 추가해야함
+    * option
     * result
 3. `emacs`의 rust 코드 구경하기
 
@@ -158,7 +158,7 @@ let vec = vec;
 
 ---
 
-# 참조자(References) // todo 문자열 -> 숫자로 변경
+# 참조자(References)
 
 1. `&`기호가 참조자를 의미
 2. **소유권**(Ownership)을 넘기지 않고 참조 가능
@@ -178,7 +178,7 @@ fn calculate_length(s: &String) -> usize { // s는 String의 참조자입니다
 
 ---
 
-# 빌림(Borrowing) // todo 문자열 -> 숫자로 변경
+# 빌림(Borrowing)
 
 1. 함수의 파라미터로 참조자를 만드는 것을 ***빌림***이라고 함
 2. 빌리고 용무가 끝나면 돌려주어야함
@@ -190,7 +190,7 @@ fn calculate_length(s: &String) -> usize {
 ```
 ---
 
-# 빌림(Borrowing) // todo 문자열 -> 숫자로 변경
+# 빌림(Borrowing)
 
 * 변수가 불변인 것 처럼 참조자도 불변
 ```rust
