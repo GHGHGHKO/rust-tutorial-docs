@@ -218,22 +218,32 @@ error: cannot borrow immutable borrowed content `*some_string` as mutable
 1. 어떤 변수에 대해 실제 사용되는 읽기 전용 참조는 여러 개 존재할 수 있다.
 2. 어떤 변수에 대해 실제 사용되는 변경 가능 참조는 단 한 개만 존재할 수 있다.
 3. 어떤 변수에 대해 실제 사용되는 변경 가능 참조와, 실제 사용되는 읽기 전용 참조는 동시에 존재할 수 없다.
+
+
+---
+
+# 가변 참조자 예시 코드
 ```rust
-let mut s = String::from("hello");
+pub fn mutable_references() {
+    let mut vector: Vec<i32> = Vec::new();
 
-let r1 = &mut s;
-let r2 = &mut s;
+    let vector1 = &mut vector;
+    let vector2 = &vector;
 
-error[E0499]: cannot borrow `s` as mutable more than once at a time
- --> borrow_twice.rs:5:19
-  |
-4 |     let r1 = &mut s;
-  |                   - first mutable borrow occurs here
-5 |     let r2 = &mut s;
-  |                   ^ second mutable borrow occurs here
-6 | }
-  | - first borrow ends here
-```
+    vector1.push(500);
+    println!("{:?}", vector2);
+}
+
+error[E0502]: cannot borrow `vector` as immutable because it is also borrowed as mutable
+4 |     let vector1 = &mut vector;
+  |                   ----------- mutable borrow occurs here
+5 |     let vector2 = &vector;
+  |                   ^^^^^^^ immutable borrow occurs here
+6 |
+7 |     vector1.push(500);
+  |     ----------------- mutable borrow later used here
+
+``````
 
 ---
 
