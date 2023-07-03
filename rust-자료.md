@@ -35,7 +35,7 @@ Mozilla developer *Graydon Hoare*
 2. Ownership
 3. 불변성
 4. Shadowing
-3. 예외와 에러 관리 (match, option, result) // option 추가해야함
+3. 예외와 에러 관리 (match, option, result)
 4. 눈물 없이는 볼 수 없는 ***감동적인 컴파일 에러 메시지***
     * 아래 예제에서 느낄 수 있습니다.
 ```rust
