@@ -48,7 +48,7 @@ error[E0308]: mismatched types
 
 ---
 
-# 안전한 메모리 관리 // todo 문자열 -> 숫자 변경
+# 안전한 메모리 관리
 ```rust
 {
     let minsu_bank_account = BankAccount { // 민수의 계좌는 여기서부터 유효합니다
