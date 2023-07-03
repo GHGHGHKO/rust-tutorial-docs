@@ -386,7 +386,7 @@ fn op_system_memory_info(
 # 끝
 
 ## # Rust SIG 모집 중
-![width:700px](https://rustmagazine.org/static/ferris-sunshine.png)
+![width:700px](https://i.imgur.com/bi7dgTv.png)
 
 ---
 
