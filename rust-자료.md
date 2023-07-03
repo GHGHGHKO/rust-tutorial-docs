@@ -32,7 +32,7 @@ Mozilla developer *Graydon Hoare*
 
 # Rust의 강점
 1. 안전한 메모리 관리
-2. Ownership // todo 예제 변경해야함
+2. Ownership
 3. 불변성  // todo 내용 추가해야함
 4. Shadowing // todo 내용 추가해야함
 3. 예외와 에러 관리 (match, option, result) // option 추가해야함
@@ -84,46 +84,34 @@ error[E0308]: mismatched types
 # Ownership 예제 코드
 ```rust
 pub fn fail_move_ownership() {
-    let i_am_on_stack: &str = "7427466391.com";
+    let i_am_on_stack: i64 = 7427466391;
     let me_too = i_am_on_stack;
 
-    println!("i_am_on_stack is {}", i_am_on_stack); //i_am_on_stack is 7427466391.com
-    println!("me_too is {}", me_too); // me_too is 7427466391.com
+    println!("i_am_on_stack is {}", i_am_on_stack);
+    println!("me_too is {}", me_too);
 
-    let i_am_on_heap = String::from("Ferris");
-    print_function(i_am_on_heap);
+    let i_am_on_heap = vec![500, 60000];
+    print_function(&i_am_on_heap);
 
     let me_too = i_am_on_heap;
-    print_function(me_too);
+    print_function(&me_too);
 }
 
-fn print_function(name: String) {
-    println!("{}", name);
+fn print_function(params: &Vec<i32>) {
+    println!("{:?}", &params);
 }
 
-error[E0382]: use of moved value: `i_am_on_heap`
-  --> src\ownership\ownership.rs:11:18
-   |
-8  |     let i_am_on_heap = String::from("Ferris");
-   |         ------------ move occurs because `i_am_on_heap` has type `std::string::String`, which does not implement the `Copy` trait
-9  |     print_function(i_am_on_heap);
-   |                    ------------ value moved here
-10 |
+// 오류 발생 예제
 11 |     let me_too = i_am_on_heap;
-   |                  ^^^^^^^^^^^^ value used here after move
+   |                  ------------ value moved here
+12 |     print_function(&me_too);
+13 |     print_function(&i_am_on_heap)
+   |                    ^^^^^^^^^^^^^ value borrowed here after move
    |
-note: consider changing this parameter type in function `print_function` to borrow instead if owning the value isn't necessary
-  --> src\ownership\ownership.rs:15:25
-   |
-15 | fn print_function(name: String) {
-   |    --------------       ^^^^^^ this parameter takes ownership of the value
-   |    |
-   |    in this function
 help: consider cloning the value if the performance cost is acceptable
    |
-9  |     print_function(i_am_on_heap.clone());
-   |                                ++++++++
-
+11 |     let me_too = i_am_on_heap.clone();
+   |                              ++++++++
 
 ```
 
