@@ -355,21 +355,10 @@ fn main() {
 - 파일을 읽고 실패(*없는 경우*)할 경우 파일을 생성하는 경우
 
 ```rust
-use std::fs::File;
-
-fn main() {
-    let f = File::open("hello.txt");
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
 }
-
-error[E0308]: mismatched types
- --> src/main.rs:4:18
-  |
-4 |     let f: u32 = File::open("hello.txt");
-  |                  ^^^^^^^^^^^^^^^^^^^^^^^ expected u32, found enum
-`std::result::Result`
-  |
-  = note: expected type `u32`
-  = note:    found type `std::result::Result<std::fs::File, std::io::Error>`
 ```
 
 ---
